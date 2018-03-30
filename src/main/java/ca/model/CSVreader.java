@@ -1,3 +1,10 @@
+/**
+ * CSVreader class reads the csv file whose address is passed in while instantiating object of this class.
+ * Whole system of course information is generated with the help of departmentBlock class.
+ * getResult functions returns the string which is meant to be the whole output.
+ * @author Raghav Mittal & Akansha Vaish
+ */
+
 package ca.model;
 
 import ca.model.blocks.DepartmentBlock;
@@ -13,7 +20,7 @@ public class CSVreader {
     private BufferedReader readerFromCSV = null;
 
     //HashMap struct to store information
-    private ca.model.blocks.DepartmentBlock DepartmentBlock = new DepartmentBlock();
+    private DepartmentBlock departmentBlock = new DepartmentBlock();
 
     public CSVreader (String filePath) {
         this.filePath = filePath;
@@ -28,9 +35,9 @@ public class CSVreader {
             readerFromCSV.readLine();
             while ((line = readerFromCSV.readLine()) != null) {
                 String[] csvLine = line.split (separatedBy);
-                FancyTrimObject(csvLine);
+                FancyTrimObject (csvLine);
 
-                DepartmentBlock.add (csvLine);
+                departmentBlock.add (csvLine);
             }
 
             readerFromCSV.close();
@@ -48,7 +55,7 @@ public class CSVreader {
         }
     }
 
-    public void printResults() {
-        DepartmentBlock.printAllEntries();
+    public String getResult() {
+        return "" + departmentBlock;
     }
 }

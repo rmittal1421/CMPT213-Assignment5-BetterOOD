@@ -1,3 +1,10 @@
+/**
+ * Enrollment stores the enrollment totat and enrollment capacity.
+ * It's each instance is stored in the hashmap in the component code like TUT, LEC
+ * All the professors offering any of the this component code get added up and so is their enrollments.
+ * @author Akansha Vaish
+ */
+
 package ca.model.blocks.CourseFields;
 
 public class Enrollment {
@@ -22,12 +29,15 @@ public class Enrollment {
         return enrollmentTotal;
     }
 
+    //Adds up enrollment of the courses whose component codes are same given rest of the information
+    //matches except for the professors.
     public void merge(Enrollment enrollment) {
         this.enrollmentCapacity += enrollment.getEnrollmentCapacity();
         this.enrollmentTotal += enrollment.getEnrollmentTotal();
     }
 
-    public void print() {
-        System.out.println ("Enrollment = " + enrollmentTotal + "/" + enrollmentCapacity);
+    @Override
+    public String toString () {
+        return "Enrollment=" + + enrollmentTotal + "/" + enrollmentCapacity;
     }
 }

@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="Assignment1-Phase1_main" target="1.8" />
       <module name="Assignment1-Phase1_test" target="1.8" />
+      <module name="Assignment5-Phase1_main" target="1.8" />
+      <module name="Assignment5-Phase1_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

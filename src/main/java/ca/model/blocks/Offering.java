@@ -1,12 +1,14 @@
+/**
+ * Every course has different offerings which are stored in offering block and each offering contains all the
+ * information about that course's offering such as semester and location of that offering, who offered the course
+ * and what was the enrollement like for different component codes such as LEC, TUT etc.
+ * @author Raghav Mittal
+ */
 package ca.model.blocks;
 
 import ca.model.blocks.CourseFields.*;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Offering {
-
-    private static AtomicInteger offeringID = new AtomicInteger();
 
     private Semester semester;
     private YearAndLocation yearAndLocation;
@@ -18,8 +20,8 @@ public class Offering {
         yearAndLocation = new YearAndLocation (semester, location);
     }
 
-    public static int getHashCode (String semester, String location) {
-        return 17 * semester.hashCode() + location.hashCode();
+    public static String hash (String semester, String location) {
+        return (semester + location);
     }
 
     public void add(String[] csvLine) {
@@ -34,10 +36,8 @@ public class Offering {
         compCode.add(csvLine[csvLine.length - 1], new Enrollment(enrollCapacity, enrollTotal));
     }
 
-    public void print() {
-        semester.print();
-        System.out.print (" by ");
-        professors.print();
-        compCode.print();
+    @Override
+    public String toString () {
+        return yearAndLocation + " by " + professors + compCode;
     }
 }

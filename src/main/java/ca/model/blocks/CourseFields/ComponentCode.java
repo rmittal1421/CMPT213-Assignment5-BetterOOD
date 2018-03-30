@@ -1,7 +1,11 @@
+/**
+ * Component Code contains a hashmap which stores all the information about different section of a particular
+ * offering and the enrollment of that section in that particular offering of that particulat course.
+ * @author Akansha Vaish
+ */
 package ca.model.blocks.CourseFields;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ComponentCode {
 
@@ -18,10 +22,16 @@ public class ComponentCode {
         }
     }
 
-    public void print() {
-        for (String code : componentCode.keySet()) {
-            System.out.print ("\t\t\t\tTYPE = " + code + ", ");
-            componentCode.get (code).print();
+    @Override
+    public String toString () {
+        String toReturn = "";
+
+        List<String> sortedKeys = new ArrayList<> (componentCode.keySet());
+        Collections.sort (sortedKeys);
+
+        for (String code : sortedKeys) {
+            toReturn += "\n\t\t\t\tTYPE=" + code + ", " + componentCode.get(code);
         }
+        return toReturn;
     }
 }

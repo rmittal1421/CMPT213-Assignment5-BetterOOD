@@ -1,19 +1,22 @@
+/**
+ * Course contains it's course code such as couse code for this course is "CMPT 213"
+ * It also contains a hashmap which stores information about all the offerings of this course in a given year of data.
+ * Every offering is uniquely defined on the basis of semester and location of the offering. hence the key of
+ * hashmap is the same.
+ * @author Raghav Mittal
+ */
 package ca.model.blocks;
 
 import ca.model.blocks.CourseFields.CourseCode;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Course {
 
-    private static AtomicInteger nextID = new AtomicInteger();
+    public static final int ARBITRARY_PRIME = 17;
 
     private CourseCode courseCode;
-    private int courseID;
     private OfferingBlock offeringBlock = new OfferingBlock ();
 
     public Course (String department, String courseCode) {
-        courseID = nextID.incrementAndGet();
         this.courseCode = new CourseCode (department, courseCode);
     }
 
@@ -21,21 +24,12 @@ public class Course {
         offeringBlock.add (csvLine);
     }
 
-    public CourseCode getCourseCode() {
-        return courseCode;
-    }
-
     public static int getHashCode (String courseCode) {
-        return 17 * courseCode.hashCode() + courseCode.length();
+        return ARBITRARY_PRIME * courseCode.hashCode() + courseCode.length();
     }
 
-    public void print () {
-        courseCode.print();
-        offeringBlock.print ();
+    @Override
+    public String toString () {
+        return "\n" + courseCode +  offeringBlock;
     }
-
-//    @Override
-//    public int hashCode () {
-//        return getHashCode ();
-//    }
 }

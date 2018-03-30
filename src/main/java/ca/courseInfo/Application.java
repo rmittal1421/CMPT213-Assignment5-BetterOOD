@@ -1,3 +1,8 @@
+/**
+ * Application class is just a main class which is Spring Boot Application..
+ * @author Akansha Vaish
+ */
+
 package ca.courseInfo;
 
 import org.springframework.boot.SpringApplication;

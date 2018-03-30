@@ -1,18 +1,18 @@
+/**
+ * Each department is contained in the hashmap stored in department block and is keyed by the name of it's subject.
+ * It contains information about all the courses offered in this department in it's courseBlock.
+ * @author Raghav Mittal
+ */
 package ca.model.blocks;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Department {
 
-    private static AtomicInteger nextID = new AtomicInteger();
+    public static final int ARBITRARY_PRIME = 17;
 
-    private int departmentID;
     private String department;
-
     private CourseBlock courseBlock = new CourseBlock ();
 
     public Department(String department) {
-        departmentID = nextID.incrementAndGet();
         this.department = department;
     }
 
@@ -20,16 +20,9 @@ public class Department {
         courseBlock.add (csvLine);
     }
 
-    public int getDepartmentID() {
-        return departmentID;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
 
     public static int getHashCode (String department) {
-        return 17 * department.hashCode() + department.length();
+        return ARBITRARY_PRIME * department.hashCode() + department.length();
     }
 
     @Override
@@ -37,7 +30,8 @@ public class Department {
         return getHashCode (this.department);
     }
 
-    public void print () {
-        courseBlock.print ();
+    @Override
+    public String toString () {
+        return "" + courseBlock;
     }
 }
