@@ -8,15 +8,21 @@
 package ca.model.blocks;
 
 import ca.model.blocks.CourseFields.CourseCode;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Course {
 
     public static final int ARBITRARY_PRIME = 17;
+    public static AtomicLong nextID = new AtomicLong();
 
+    private long courseId;
     private CourseCode courseCode;
     private OfferingBlock offeringBlock = new OfferingBlock ();
 
-    public Course (String department, String courseCode) {
+    public Course (String department, String courseCode, long courseId) {
+        this.courseId = courseId;
         this.courseCode = new CourseCode (department, courseCode);
     }
 
@@ -24,8 +30,25 @@ public class Course {
         offeringBlock.add (csvLine);
     }
 
-    public static int getHashCode (String courseCode) {
-        return ARBITRARY_PRIME * courseCode.hashCode() + courseCode.length();
+    public static String getHashCode (String courseCode) {
+        return courseCode;
+    }
+
+    public static long getNextID () {
+        return nextID.incrementAndGet();
+    }
+
+    public long getCourseId () {
+        return this.courseId;
+    }
+
+    public String getCatalogNumber () {
+        return courseCode.getSubjectCode();
+    }
+
+    @JsonIgnore
+    public OfferingBlock getOfferningBlock() {
+        return offeringBlock;
     }
 
     @Override

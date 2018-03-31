@@ -20,4 +20,12 @@ public class CourseCode {
     public String toString () {
         return courseSubject + " " + subjectCode;
     }
+
+    public String getCourseSubject() {
+        return courseSubject;
+    }
+
+    public String getSubjectCode() {
+        return subjectCode;
+    }
 }

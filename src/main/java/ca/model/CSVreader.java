@@ -58,4 +58,8 @@ public class CSVreader {
     public String getResult() {
         return "" + departmentBlock;
     }
+
+    public DepartmentBlock getDepartmentBlock() {
+        return departmentBlock;
+    }
 }

@@ -13,14 +13,26 @@ import java.util.*;
 public class DepartmentBlock {
 
     public static final int DEPARTMENT_INDEX = 1;
+    private Map <String, Department> departmentBlock = new HashMap<>();
 
-    private Map <Integer, Department> departmentBlock = new HashMap<>();
+    public List <Department> getDepartmentBlock() {
+        List <Department> departmentList = new ArrayList<>();
+
+        List<String> sortedKeys = new ArrayList<> (departmentBlock.keySet());
+        Collections.sort (sortedKeys);
+
+        for (String key : sortedKeys) {
+            departmentList.add (departmentBlock.get(key));
+        }
+
+        return departmentList;
+    }
 
     public void add (String[] csvLine) {
-        int departmentHash = Department.getHashCode (csvLine [DEPARTMENT_INDEX]);
-
+        String departmentHash = Department.getHashCode (csvLine [DEPARTMENT_INDEX]);
         if (departmentBlock.get(departmentHash) == null) {
-            departmentBlock.put (departmentHash, new Department (csvLine [DEPARTMENT_INDEX]));
+            Department newDepartment = new Department (csvLine [DEPARTMENT_INDEX], Department.getNextID());
+            departmentBlock.put (departmentHash, newDepartment );
         }
 
         departmentBlock.get (departmentHash).addCourse (csvLine);
@@ -31,10 +43,10 @@ public class DepartmentBlock {
 
         String toReturn = "";
 
-        List<Integer> sortedKeys = new ArrayList<> (departmentBlock.keySet());
+        List<String> sortedKeys = new ArrayList<> (departmentBlock.keySet());
         Collections.sort (sortedKeys);
 
-        for (Integer departmentKey : sortedKeys) {
+        for (String departmentKey : sortedKeys) {
             toReturn +=  departmentBlock.get (departmentKey);
         }
 

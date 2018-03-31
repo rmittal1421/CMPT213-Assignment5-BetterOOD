@@ -19,10 +19,23 @@ public class OfferingBlock {
         String offeringID = Offering.hash (csvLine [SEMESTER_INDEX], csvLine [LOCATION_INDEX]);
 
         if (offeringBlock.get(offeringID) == null) {
-            offeringBlock.put(offeringID, new Offering (csvLine [SEMESTER_INDEX], csvLine [LOCATION_INDEX]));
+            offeringBlock.put(offeringID, new Offering (csvLine [SEMESTER_INDEX], csvLine [LOCATION_INDEX], Offering.getNextID()));
         }
 
         offeringBlock.get(offeringID).add(csvLine);
+    }
+
+    public List <Offering> getOfferingBlock() {
+        List <Offering> listOfOfferings = new ArrayList<>();
+
+        List <String> sortedKeys = new ArrayList<> (offeringBlock.keySet());
+        Collections.sort (sortedKeys);
+
+        for (String key : sortedKeys) {
+            listOfOfferings.add (offeringBlock.get (key));
+        }
+
+        return listOfOfferings;
     }
 
     @Override

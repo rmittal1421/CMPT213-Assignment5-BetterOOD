@@ -8,14 +8,20 @@ package ca.model.blocks;
 
 import ca.model.blocks.CourseFields.*;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 public class Offering {
 
+    public static AtomicLong nextID = new AtomicLong();
+
+    private long offeringId;
     private Semester semester;
     private YearAndLocation yearAndLocation;
     private Professor professors = new Professor();
     private ComponentCode compCode = new ComponentCode();
 
-    public Offering (String semester, String location) {
+    public Offering (String semester, String location, long offeringId) {
+        this.offeringId = offeringId;
         this.semester = new Semester (semester);
         yearAndLocation = new YearAndLocation (semester, location);
     }
@@ -34,6 +40,26 @@ public class Offering {
         int enrollTotal = Integer.parseInt(csvLine[5]);
 
         compCode.add(csvLine[csvLine.length - 1], new Enrollment(enrollCapacity, enrollTotal));
+    }
+
+    public static long getNextID () {
+        return nextID.incrementAndGet();
+    }
+
+    public long getOfferingId() {
+        return offeringId;
+    }
+
+    public String getLocation () {
+        return yearAndLocation.getLocation();
+    }
+
+    public Professor getProfessors() {
+        return professors;
+    }
+
+    public Semester getSemester() {
+        return semester;
     }
 
     @Override

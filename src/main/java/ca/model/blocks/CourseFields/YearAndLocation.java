@@ -20,4 +20,12 @@ public class YearAndLocation {
     public String toString() {
         return courseSemester + " in " + location;
     }
+
+    public Semester getCourseSemester() {
+        return courseSemester;
+    }
+
+    public String getLocation() {
+        return location;
+    }
 }

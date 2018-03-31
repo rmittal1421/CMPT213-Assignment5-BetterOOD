@@ -14,16 +14,29 @@ public class CourseBlock {
     public static final int CATALOG_INDEX = 2;
     public static final int DEPARTMENT_INDEX = 1;
 
-    private Map<Integer, Course> courseBlock = new HashMap<>();
+    private Map<String, Course> courseBlock = new HashMap<>();
 
     public void add(String[] csvLine) {
-        int courseID = Course.getHashCode (csvLine [CATALOG_INDEX]);
+        String courseID = Course.getHashCode (csvLine [CATALOG_INDEX]);
 
         if (courseBlock.get (courseID) == null) {
-            courseBlock.put (courseID, new Course (csvLine [DEPARTMENT_INDEX], csvLine [CATALOG_INDEX]));
+            courseBlock.put (courseID, new Course (csvLine [DEPARTMENT_INDEX], csvLine [CATALOG_INDEX], Course.getNextID()));
         }
 
         courseBlock.get (courseID).addOffering (csvLine);
+    }
+
+    public List <Course> getCourseBlock() {
+        List <Course> listOfCourses = new ArrayList<>();
+
+        List<String> sortedKeys = new ArrayList<> (courseBlock.keySet());
+        Collections.sort (sortedKeys);
+
+        for (String key : sortedKeys) {
+            listOfCourses.add (courseBlock.get (key));
+        }
+
+        return listOfCourses;
     }
 
     @Override
@@ -31,10 +44,10 @@ public class CourseBlock {
 
         String toReturn = "";
 
-        List<Integer> sortedKeys = new ArrayList<> (courseBlock.keySet());
+        List<String> sortedKeys = new ArrayList<> (courseBlock.keySet());
         Collections.sort (sortedKeys);
 
-        for (Integer courseID : sortedKeys) {
+        for (String courseID : sortedKeys) {
             toReturn += courseBlock.get(courseID);
         }
 
