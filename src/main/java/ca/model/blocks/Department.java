@@ -6,7 +6,7 @@
 package ca.model.blocks;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Department {
@@ -17,6 +17,7 @@ public class Department {
     private String name;
     private long deptId;
     private CourseBlock courseBlock = new CourseBlock ();
+    private Map <Integer, GraphData> semesterEnrollments = new HashMap<>();
 
     public Department(String name, long deptId) {
         this.name = name;
@@ -25,6 +26,18 @@ public class Department {
 
     public void addCourse (String[] csvLine) {
         courseBlock.add (csvLine);
+
+        int semesterCode = Integer.parseInt (csvLine [0]);
+        GraphData graphData;
+
+        if ((graphData = semesterEnrollments.get (semesterCode)) == null) {
+            graphData = new GraphData (semesterCode);
+            semesterEnrollments.put (semesterCode, graphData);
+        }
+
+        if (csvLine [csvLine.length - 1].equals("LEC")) {
+            graphData.merge (csvLine[5]);
+        }
     }
 
     public String getName() {
@@ -36,7 +49,6 @@ public class Department {
     }
 
     public static String getHashCode (String department) {
-//        return (ARBITRARY_PRIME * department.hashCode()) / (department.length()*10) ;
         return department;
     }
 
@@ -52,5 +64,45 @@ public class Department {
     @Override
     public String toString () {
         return "" + courseBlock;
+    }
+
+    public void fillSemesterEnrollments () {
+        List <Integer> keysOfGraphData = new ArrayList<> (semesterEnrollments.keySet());
+        Collections.sort (keysOfGraphData);
+
+        if (keysOfGraphData.size() == 0) {
+            return;
+        }
+        else {
+            int startSem = keysOfGraphData.get(0);
+            int lastSem = keysOfGraphData.get (keysOfGraphData.size() - 1);
+            int currentSem = startSem;
+
+            while (currentSem < lastSem) {
+                if (semesterEnrollments.get (currentSem) == null) {
+                    int sfuSem = currentSem % 10;
+
+                    if ((sfuSem == 1) || (sfuSem == 4) || (sfuSem == 7)) {
+                        semesterEnrollments.put (currentSem, new GraphData (currentSem));
+                    }
+                }
+                currentSem++;
+            }
+        }
+    }
+
+    @JsonIgnore
+    public List <GraphData> getGraphData () {
+
+        List <GraphData> listOfGraphData = new ArrayList<>();
+
+        List <Integer> keysOfGraphData = new ArrayList<> (semesterEnrollments.keySet());
+        Collections.sort(keysOfGraphData);
+
+        for (Integer key : keysOfGraphData) {
+            listOfGraphData.add (semesterEnrollments.get (key));
+        }
+
+        return listOfGraphData;
     }
 }

@@ -5,13 +5,15 @@
  */
 package ca.model.blocks.CourseFields;
 
+import ca.model.blocks.Course;
+
 import java.util.*;
 
 public class ComponentCode {
 
     private Map<String, Enrollment> componentCode = new HashMap<>();
 
-    public void add(String compCode, Enrollment enrollment) {
+    public void add (String compCode, Enrollment enrollment) {
         Enrollment tempEnroll = componentCode.get (compCode);
 
         if (tempEnroll == null) {
@@ -20,6 +22,19 @@ public class ComponentCode {
         else {
             tempEnroll.merge (enrollment);
         }
+    }
+
+    public List <Enrollment> getEnrollment () {
+        List <Enrollment> listOfEnrollments = new ArrayList<>();
+
+        List<String> sortedKeys = new ArrayList<> (componentCode.keySet());
+        Collections.sort (sortedKeys);
+
+        for (String key : sortedKeys) {
+            listOfEnrollments.add (componentCode.get (key));
+        }
+
+        return listOfEnrollments;
     }
 
     @Override

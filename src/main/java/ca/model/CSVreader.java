@@ -62,4 +62,16 @@ public class CSVreader {
     public DepartmentBlock getDepartmentBlock() {
         return departmentBlock;
     }
+
+    public void addDynamically (String csvLine) {
+        String[] thisCSVLine = csvLine.split (separatedBy);
+
+        FancyTrimObject (thisCSVLine);
+
+//        for (String s : thisCSVLine) {
+//            System.out.println(s);
+//        }
+
+        departmentBlock.add (thisCSVLine);
+    }
 }

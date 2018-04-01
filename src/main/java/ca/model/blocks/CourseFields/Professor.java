@@ -43,4 +43,8 @@ public class Professor {
 
         return stringBuilder.toString();
     }
+
+    public List<String> getListOfProfessors() {
+        return listOfProfessors;
+    }
 }

@@ -47,8 +47,19 @@ public class Course {
     }
 
     @JsonIgnore
-    public OfferingBlock getOfferningBlock() {
+    public OfferingBlock getOfferingBlock() {
         return offeringBlock;
+    }
+
+    @JsonIgnore
+    public Offering getOffering (long offeringId) {
+        for (Offering offering : offeringBlock.getOfferingBlock()) {
+            if (offering.getCourseOfferingId() == offeringId) {
+                return offering;
+            }
+        }
+
+        return null;
     }
 
     @Override

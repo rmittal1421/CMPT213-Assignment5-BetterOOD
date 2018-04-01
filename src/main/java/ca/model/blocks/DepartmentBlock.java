@@ -29,7 +29,9 @@ public class DepartmentBlock {
     }
 
     public void add (String[] csvLine) {
+
         String departmentHash = Department.getHashCode (csvLine [DEPARTMENT_INDEX]);
+
         if (departmentBlock.get(departmentHash) == null) {
             Department newDepartment = new Department (csvLine [DEPARTMENT_INDEX], Department.getNextID());
             departmentBlock.put (departmentHash, newDepartment );

@@ -8,21 +8,27 @@
 package ca.model.blocks.CourseFields;
 
 public class Enrollment {
-    private int enrollmentCapacity;
+    private String type;
+    private int enrollmentCap;
     private int enrollmentTotal;
 
-    public Enrollment (int enrollmentCapacity, int enrollmentTotal) {
-        this.enrollmentCapacity = enrollmentCapacity;
+    public Enrollment (String compCode, int enrollmentCap, int enrollmentTotal) {
+        this.type = compCode;
+        this.enrollmentCap = enrollmentCap;
         this.enrollmentTotal = enrollmentTotal;
     }
 
-    public Enrollment (String enrollmentCapacity, String enrollmentTotal) {
-        this.enrollmentCapacity = Integer.parseInt (enrollmentCapacity);
+    public Enrollment (String enrollmentCap, String enrollmentTotal) {
+        this.enrollmentCap = Integer.parseInt (enrollmentCap);
         this.enrollmentTotal = Integer.parseInt (enrollmentTotal);
     }
 
-    public int getEnrollmentCapacity() {
-        return enrollmentCapacity;
+    public String getType() {
+        return type;
+    }
+
+    public int getEnrollmentCap() {
+        return enrollmentCap;
     }
 
     public int getEnrollmentTotal() {
@@ -32,12 +38,12 @@ public class Enrollment {
     //Adds up enrollment of the courses whose component codes are same given rest of the information
     //matches except for the professors.
     public void merge(Enrollment enrollment) {
-        this.enrollmentCapacity += enrollment.getEnrollmentCapacity();
+        this.enrollmentCap += enrollment.getEnrollmentCap();
         this.enrollmentTotal += enrollment.getEnrollmentTotal();
     }
 
     @Override
     public String toString () {
-        return "Enrollment=" + + enrollmentTotal + "/" + enrollmentCapacity;
+        return "Enrollment=" + + enrollmentTotal + "/" + enrollmentCap;
     }
 }
