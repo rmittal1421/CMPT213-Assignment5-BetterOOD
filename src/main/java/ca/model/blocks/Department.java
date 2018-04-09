@@ -1,21 +1,21 @@
 /**
  * Each name is contained in the hashmap stored in name block and is keyed by the name of it's subject.
  * It contains information about all the courses offered in this name in it's courseBlock.
- * @author Raghav Mittal
+ * @author Raghav Mittal & Akansha Vaish
  */
 package ca.model.blocks;
 
+import ca.model.app.GraphData;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Department {
 
-    public static final int ARBITRARY_PRIME = 17;
     public static AtomicLong nextID = new AtomicLong();
 
-    private String name;
     private long deptId;
+    private String name;
     private CourseBlock courseBlock = new CourseBlock ();
     private Map <Integer, GraphData> semesterEnrollments = new HashMap<>();
 
@@ -40,12 +40,12 @@ public class Department {
         }
     }
 
-    public String getName() {
-        return name;
-    }
-
     public long getDeptId() {
         return deptId;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public static String getHashCode (String department) {

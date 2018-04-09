@@ -1,4 +1,9 @@
-package ca.model.blocks;
+/**
+ * Graph data is holding the fields required explicilty for data to go in graph.
+ * This class is designed to cop up with the data in UI.
+ * @author vakansha & rmittal
+ */
+package ca.model.app;
 
 public class GraphData {
     private int semesterCode;

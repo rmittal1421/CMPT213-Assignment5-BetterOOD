@@ -1,9 +1,15 @@
-package ca.courseInfo.contollers;
+/**
+ * Class carries all the fields which are required to add any field which can be added to a course.
+ * If we want to add any course which is not in the given csv file, this type of object is required to input.
+ *
+ * #author Akansha Vaish
+ */
+package ca.model.blocks.CourseFields;
 
 public class PostingFields {
     private int semester;
     private String subjectName;
-    private int catalogNumber;
+    private String catalogNumber;
     private String location;
     private int enrollmentCap;
     private String component;
@@ -18,7 +24,7 @@ public class PostingFields {
         this.subjectName = subjectName;
     }
 
-    public void setCatalogNumber(int catalogNumber) {
+    public void setCatalogNumber(String catalogNumber) {
         this.catalogNumber = catalogNumber;
     }
 
@@ -50,7 +56,7 @@ public class PostingFields {
         return subjectName;
     }
 
-    public int getCatalogNumber() {
+    public String getCatalogNumber() {
         return catalogNumber;
     }
 

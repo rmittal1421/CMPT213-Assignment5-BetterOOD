@@ -5,7 +5,7 @@
  * @author Raghav Mittal & Akansha Vaish
  */
 
-package ca.model;
+package ca.model.app;
 
 import ca.model.blocks.DepartmentBlock;
 
@@ -28,16 +28,14 @@ public class CSVreader {
     }
 
     private void readLineByLine(String filePath) {
-        String line;
+        String csvLine;
+
         try {
-            readerFromCSV = new BufferedReader (new FileReader(filePath));
+            readerFromCSV = new BufferedReader (new FileReader (filePath));
 
             readerFromCSV.readLine();
-            while ((line = readerFromCSV.readLine()) != null) {
-                String[] csvLine = line.split (separatedBy);
-                FancyTrimObject (csvLine);
-
-                departmentBlock.add (csvLine);
+            while ((csvLine = readerFromCSV.readLine()) != null) {
+                addToInformation (csvLine);
             }
 
             readerFromCSV.close();
@@ -45,6 +43,13 @@ public class CSVreader {
         catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    private void addToInformation(String line) {
+        String[] csvLine = line.split (separatedBy);
+        FancyTrimObject (csvLine);
+
+        departmentBlock.add (csvLine);
     }
 
     //Meaning of word Fancy Trim is that it trims all the strings and also does additional work.
@@ -55,23 +60,15 @@ public class CSVreader {
         }
     }
 
-    public String getResult() {
-        return "" + departmentBlock;
-    }
-
     public DepartmentBlock getDepartmentBlock() {
         return departmentBlock;
     }
 
+    public String getResult() {
+        return "" + departmentBlock;
+    }
+
     public void addDynamically (String csvLine) {
-        String[] thisCSVLine = csvLine.split (separatedBy);
-
-        FancyTrimObject (thisCSVLine);
-
-//        for (String s : thisCSVLine) {
-//            System.out.println(s);
-//        }
-
-        departmentBlock.add (thisCSVLine);
+        addToInformation (csvLine);
     }
 }

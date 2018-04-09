@@ -18,7 +18,8 @@ public class Enrollment {
         this.enrollmentTotal = enrollmentTotal;
     }
 
-    public Enrollment (String enrollmentCap, String enrollmentTotal) {
+    public Enrollment (String compCode, String enrollmentCap, String enrollmentTotal) {
+        this.type = compCode;
         this.enrollmentCap = Integer.parseInt (enrollmentCap);
         this.enrollmentTotal = Integer.parseInt (enrollmentTotal);
     }

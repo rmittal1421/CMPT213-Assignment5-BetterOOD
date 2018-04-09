@@ -15,19 +15,6 @@ public class DepartmentBlock {
     public static final int DEPARTMENT_INDEX = 1;
     private Map <String, Department> departmentBlock = new HashMap<>();
 
-    public List <Department> getDepartmentBlock() {
-        List <Department> departmentList = new ArrayList<>();
-
-        List<String> sortedKeys = new ArrayList<> (departmentBlock.keySet());
-        Collections.sort (sortedKeys);
-
-        for (String key : sortedKeys) {
-            departmentList.add (departmentBlock.get(key));
-        }
-
-        return departmentList;
-    }
-
     public void add (String[] csvLine) {
 
         String departmentHash = Department.getHashCode (csvLine [DEPARTMENT_INDEX]);
@@ -38,6 +25,19 @@ public class DepartmentBlock {
         }
 
         departmentBlock.get (departmentHash).addCourse (csvLine);
+    }
+
+    public List <Department> getDepartmentBlock() {
+        List <Department> departmentList = new ArrayList<>();
+
+        List <String> sortedKeys = new ArrayList<> (departmentBlock.keySet());
+        Collections.sort (sortedKeys);
+
+        for (String key : sortedKeys) {
+            departmentList.add (departmentBlock.get(key));
+        }
+
+        return departmentList;
     }
 
     @Override

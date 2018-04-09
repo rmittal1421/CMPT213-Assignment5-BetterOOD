@@ -20,7 +20,8 @@ public class CourseBlock {
         String courseID = Course.getHashCode (csvLine [CATALOG_INDEX]);
 
         if (courseBlock.get (courseID) == null) {
-            courseBlock.put (courseID, new Course (csvLine [DEPARTMENT_INDEX], csvLine [CATALOG_INDEX], Course.getNextID()));
+            courseBlock.put (courseID, new Course (csvLine [DEPARTMENT_INDEX],
+                                                    csvLine [CATALOG_INDEX], Course.getNextID()));
         }
 
         courseBlock.get (courseID).addOffering (csvLine);

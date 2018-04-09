@@ -5,8 +5,6 @@
  */
 package ca.model.blocks.CourseFields;
 
-import ca.model.blocks.Course;
-
 import java.util.*;
 
 public class ComponentCode {

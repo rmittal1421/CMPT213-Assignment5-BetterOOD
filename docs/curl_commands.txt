@@ -19,7 +19,7 @@ curl -i -s -H "Content-Type: application/json" \
 
 # NOTE: Your ID's will likely be different from these!
 # Change them to match your ID's for your own testing.
-DEPT=2      # CMPT
+DEPT=3      # CMPT
 COURSE=103  # 213
 OFFERING=7063  # Brian's 2018 offering
 
@@ -70,11 +70,11 @@ curl -i -s -H "Content-Type: application/json" \
 # -------------------------------
 # NOTE: Adding data to the model may require refreshing the UI
 # (F5 in the browser, or reload the page by navigating to another page)
-curl -i -s -H "Content-Type: application/json" \
+curl -i -H "Content-Type: application/json" \
     -X POST  -d '{
         "semester": 1191,
         "subjectName": "CMPT",
-        "catalogNumber": 213,
+        "catalogNumber": "213",
         "location": "SURREY",
         "enrollmentCap": 90,
         "component": "LEC",
@@ -82,11 +82,11 @@ curl -i -s -H "Content-Type: application/json" \
         "instructor": "Brian Fraser"
     }' ${SERVER}/api/addoffering
 
-curl -i -s -H "Content-Type: application/json" \
+curl -i -H "Content-Type: application/json" \
     -X POST  -d '{
         "semester": 1181,
         "subjectName": "CMPT",
-        "catalogNumber": 300,
+        "catalogNumber": "300",
         "location": "SURREY",
         "enrollmentCap": 101,
         "component": "TUT",
@@ -95,11 +95,11 @@ curl -i -s -H "Content-Type: application/json" \
     }' ${SERVER}/api/addoffering
 
 # Test adding new course
-curl -i -s -H "Content-Type: application/json" \
+curl -i -H "Content-Type: application/json" \
     -X POST  -d '{
         "semester": 1191,
         "subjectName": "CMPT",
-        "catalogNumber": 911,
+        "catalogNumber": "XX9",
         "location": "SURREY",
         "enrollmentCap": 10,
         "component": "TUT",
@@ -107,19 +107,18 @@ curl -i -s -H "Content-Type: application/json" \
         "instructor": "Dr. Alice"
     }' ${SERVER}/api/addoffering
 
-# Test adding new name
-curl -i -s -H "Content-Type: application/json" \
+# Test adding new department
+curl -i -H "Content-Type: application/json" \
     -X POST  -d '{
         "semester": 1191,
         "subjectName": "ABCD",
-        "catalogNumber": 101,
+        "catalogNumber": "101",
         "location": "Vancouver",
         "enrollmentCap": 123,
         "component": "LEC",
         "enrollmentTotal": 110,
         "instructor": "Mystery Instructor"
     }' ${SERVER}/api/addoffering
-
 
 # Watchers
 # -------------------------------

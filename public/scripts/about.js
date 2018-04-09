@@ -3,7 +3,7 @@
 const myAppObj = new Vue({
     el: "#aboutApp",
     data: {
-        appName: "(waiting for server...)",
+        appName: "(waiting fro server...)",
         authorName: "(waiting for server...)",
     },
     methods: {
