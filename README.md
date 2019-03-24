@@ -12,6 +12,17 @@ Front end : HTML/CSS/axiom
 Back end : Java
 Requirements to run the application : IDE to support Java, Java SDK, JDK 8 
 Dependencies : Java Spring for REST API
+API used:
+"api/about" - Tells about the author of the website and the functionality of the website
+"api/dump-model" -  Clears the database so it can reloaded
+"api/departments" - Gives list of all departments in SFU
+"api/departments/{id}/courses" - Gives list of all courses offered in a particular department in SFU
+"api/departments/{id}/courses/{courseId}/offerings" -  Gives list of all courses offered in a particular department in SFU in particular semester of the year
+"api/stats/students-per-semester" - Give status of students enrolled in the class or on a waitlist
+"/api/watchers" -  Adds a watcher for a particular course to notify students about the status of the course
+
+
+No database is used and backend is store in a CSV file
 
 ## Contributing
 
