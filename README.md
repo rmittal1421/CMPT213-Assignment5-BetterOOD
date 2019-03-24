@@ -8,7 +8,10 @@ The website is not hosted on the server yet. Hence the user needs to clone the p
 
 ## Technical Information
 
-The backend for the website was chosen to be JAVA and the front end was designed by using HTML and CSS and axiom. There is a need to work on the front end for website since it is not that user friendly. The focus should be on making the website more user friendly so that it is easier for students to use it. Moreover, the website is not tested for load balancing and incase, the traffic on the webiste is increased, there is a high chance that the website can crash. So, there is a need to take of that too.
+Front end : HTML/CSS/axiom
+Back end : Java
+Requirements to run the application : IDE to support Java, Java SDK, JDK 8 
+Dependencies : Java Spring for REST API
 
 ## Contributing
 
